@@ -8,10 +8,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
+    public $isIt, $isIsThough;
+
+    public function __construct(){
+    }
+
     /**
      * @Route("/", name="home_page")
      */
-    public function detail(Request $request) {
-        return $this->render("base.html.twig");
+    public function index(Request $request) {
+        return 5;
     }
 }

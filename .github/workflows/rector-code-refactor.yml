@@ -10,9 +10,7 @@ jobs:
   rector:
     name: Rector
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Rector
-        run: /vendor/bin/rector process src
+        uses: zingimmick/rector-action@0.0.2

@@ -7,10 +7,11 @@ on:
     branches: [ master ]
 
 jobs:
-  rector:
-    name: Rector
+  build:
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Rector
-        uses: zingimmick/rector-action@0.0.2
+
+      - name: Run Ractor
+        run: vendor/bin/rector process src

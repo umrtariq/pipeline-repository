@@ -1,8 +1,6 @@
 {
-    "name": "symfony/framework-standard-edition",
     "type": "project",
     "license": "proprietary",
-    "description": "The \"Symfony Standard Edition\" distribution",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {

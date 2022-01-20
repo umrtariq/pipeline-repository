@@ -7,11 +7,16 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  rector:
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Run Ractor
-        run: public/vendor/bin/rector process src
+        run: vendor/bin/rector process src
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply rector changes
+          push_options: --force

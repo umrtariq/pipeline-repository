@@ -17,22 +17,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // Define what rule sets will be applied
     $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
+    $containerConfigurator->import(SetList::DEAD_CODE);
 
     // register single rule
     $services = $containerConfigurator->services();
     $services->set(TypedPropertyRector::class);
-
-    $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, getcwd() . '/phpstan-for-config.neon');
-
-    // A. run whole set
-    $containerConfigurator->import(SetList::DEAD_CODE);
-
-    // B. or single rule
-    $services->set(TypedPropertyRector::class);
-
-    // get services (needed for register a single rule)
-    // $services = $containerConfigurator->services();
-
-    // register a single rule
-    // $services->set(TypedPropertyRector::class);
 };

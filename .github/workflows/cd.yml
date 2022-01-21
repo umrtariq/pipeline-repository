@@ -1,0 +1,38 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    name: Deploy AWS
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+        app-name: ['pipeline-app']
+        deployment-group: ['pipleline-app-group']
+        repo: ['umrtariq/pipeline-repository']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      # Deploy to AWS
+      - name: Deploy to AWS
+        run: |
+          aws deploy create-deployment \
+          --application-name pipeline-app \
+          --deployment-config-name CodeDeployDefault.OneAtATime \
+          --deployment-group-name pipleline-app-group \
+          --file-exists-behavior OVERWRITE \
+          --description "GitHub Deployment for the pipeline-app-${{ github.sha }}" \
+          --github-location repository=umrtariq/pipeline-repository,commitId=${{ github.sha }}
